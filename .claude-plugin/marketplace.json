@@ -1,0 +1,16 @@
+{
+  "name": "creaitive-studio",
+  "owner": {
+    "name": "Creaitive Studio",
+    "url": "https://github.com/DataNinja101"
+  },
+  "description": "Learning and study plugins by Creaitive Studio.",
+  "plugins": [
+    {
+      "name": "interactive-learning-studio",
+      "source": "./",
+      "description": "Turn course materials or any topic into an offline interactive learning website with quizzes, flashcards, active recall, matching practice and progress tracking.",
+      "category": "learning"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.DS_Store
+shots/
+sources/
+*.course.json

@@ -1,0 +1,14 @@
+{
+  "name": "interactive-learning-studio",
+  "displayName": "Interactive Learning Studio",
+  "version": "0.2.0",
+  "description": "Turn supplied course materials or any learning topic into a downloadable, offline-capable interactive HTML learning website with quizzes, flashcards, active recall, matching practice and progress tracking.",
+  "author": {
+    "name": "Creaitive Studio",
+    "url": "https://github.com/DataNinja101"
+  },
+  "homepage": "https://github.com/DataNinja101/interactive-learning-studio",
+  "repository": "https://github.com/DataNinja101/interactive-learning-studio",
+  "license": "MIT",
+  "keywords": ["learning", "e-learning", "quiz", "flashcards", "spaced repetition", "question bank", "study", "education"]
+}
