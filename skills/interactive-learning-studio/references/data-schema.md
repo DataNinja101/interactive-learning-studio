@@ -28,6 +28,7 @@ template. Keep every course in this exact shape so the two skills stay compatibl
 | `version`     | no       | Free text, e.g. `"2026-10"`. Bump when content changes. |
 | `author`      | no       | Shown in the footer. |
 | `ui`          | no       | Map of interface-label overrides (keys listed in `ui-strings.md`). Use for languages other than English/Greek. |
+| `askClaude`   | no       | `true` by default: lessons and answered items show an **Ask Claude** button. Set `false` to hide it, for example when the course is used for assessment. |
 
 ## sources
 

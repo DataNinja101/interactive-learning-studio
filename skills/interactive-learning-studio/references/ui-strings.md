@@ -2,7 +2,9 @@
 
 The site shows its buttons and messages in English, or in Greek when `course.language` starts with `el`.
 For any other language, translate the labels below and put them in `course.ui` (same keys). Missing keys fall back to English.
-Keep `{placeholders}` exactly as written. `sc` is a list of four keyboard-shortcut lines.
+Keep `{placeholders}` exactly as written. `sc` is a list of four keyboard-shortcut lines, and
+the three `askSuggest…` keys are lists of three suggested questions. The suggestions and
+`askIntro` are words the learner sends to Claude, so write them as the learner would.
 
 | Key | English |
 |-----|---------|
@@ -101,3 +103,31 @@ Keep `{placeholders}` exactly as written. `sc` is a list of four keyboard-shortc
 | `updated` | Version {v} |
 | `notFound` | That page does not exist. |
 | `skip` | Skip to content |
+| `askClaude` | Ask Claude |
+| `askAboutItem` | Ask Claude about this |
+| `askAboutLesson` | Ask Claude about this lesson |
+| `askPlaceholder` | Type your question |
+| `askSend` | Ask |
+| `askStop` | Stop |
+| `askThinking` | Thinking… |
+| `askStopped` | Stopped. |
+| `askOpen` | Open in Claude |
+| `askCopy` | Copy for Claude |
+| `askCopied` | Copied. Paste it into a chat with Claude. |
+| `askCopyFailed` | This browser blocked copying. |
+| `askNote` | Claude answers using your own Claude account. Answers can be wrong, so check them against the lesson. |
+| `askOutNote` | Opens a new chat with Claude in another tab, with your question and this material filled in. It is copied too, so you can paste it if the box is empty. Nothing is sent until you send it there. |
+| `askUnavailable` | Claude can’t answer inside this page. Use “Open in Claude” instead. |
+| `askBusy` | Claude is busy or your usage limit is reached. Try again later. |
+| `askSignIn` | Sign in to Claude again, then try once more. |
+| `askRefused` | Claude couldn’t answer that. Try asking it another way. |
+| `askEmpty` | No answer came back. Try rephrasing your question. |
+| `askTooLong` | That is too much to send at once. Ask a shorter question. |
+| `askFailed` | The answer was interrupted. Try again. |
+| `askCut` | The answer was cut short. Ask for less at a time. |
+| `askExplanation` | Explanation |
+| `askMyQuestion` | My question |
+| `askIntro` | I’m studying with a self-study site and have a question about the material below. Please base your answer on it, tell me if you use anything it doesn’t contain, and keep it short. |
+| `askSuggestQuiz` | Why is this the right answer? / Explain it more simply / Give me a similar question |
+| `askSuggestItem` | Explain this more simply / Give me an example / How can I remember this? |
+| `askSuggestLesson` | Summarise this lesson / Explain the hardest part simply / Ask me a question to check I understand |
