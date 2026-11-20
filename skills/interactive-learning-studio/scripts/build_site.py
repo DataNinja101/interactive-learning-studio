@@ -198,6 +198,8 @@ def validate(data, for_site=True):
         rep.err("course", "'title' is required")
     if "ui" in c and not isinstance(c["ui"], dict):
         rep.err("course", "'ui' must be an object of label overrides")
+    if "askClaude" in c and not isinstance(c["askClaude"], bool):
+        rep.err("course", "'askClaude' must be true or false")
 
     sources = data.get("sources", [])
     source_ids = set()

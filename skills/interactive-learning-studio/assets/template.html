@@ -259,6 +259,32 @@ dialog::backdrop{background:rgba(16,24,36,.45)}
 .dlg-close{float:right;margin:-.4rem -.5rem 0 0}
 .toast{position:fixed;left:50%;bottom:1.25rem;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:.6rem 1rem;border-radius:8px;font-size:.95rem;z-index:20;box-shadow:var(--shadow)}
 
+/* ask Claude */
+.btn.ask-open{text-decoration:none}
+.ask-open svg{width:1.1rem;height:1.1rem;flex:none}
+.ask{max-width:44rem;margin-top:1rem;padding:1rem 1.1rem 1.1rem;background:var(--surface);border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow)}
+.ask h3{display:flex;align-items:center;gap:.5rem;font-size:1.05rem;margin:0 0 .75rem}
+.ask h3 svg{width:1.15rem;height:1.15rem;color:var(--pen);flex:none}
+.ask-log{display:grid;gap:.75rem}
+.ask-log:not(:empty){margin-bottom:.9rem}
+.ask-q{justify-self:end;max-width:85%;padding:.5rem .8rem;border-radius:12px 12px 3px 12px;background:var(--pen-soft);white-space:pre-wrap;overflow-wrap:anywhere}
+.ask-a{overflow-wrap:anywhere}
+.ask-a>*{margin:0}
+.ask-a>*+*{margin-top:.55rem}
+.ask-a ul,.ask-a ol{padding-left:1.3rem}
+.ask-a li+li{margin-top:.25rem}
+.ask-a code{font-family:var(--mono);font-size:.9em;background:var(--card-rule);padding:.08em .3em;border-radius:4px}
+.ask-a.is-wait{color:var(--ink-faint);font-style:italic}
+.ask-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
+.chip{padding:.35rem .8rem;border:1px solid var(--rule);border-radius:999px;background:var(--surface-2);color:var(--ink-soft);font-size:.9rem;line-height:1.3;text-align:left;cursor:pointer}
+.chip:hover{border-color:var(--pen);color:var(--pen)}
+.chip[disabled]{opacity:.5;cursor:default;pointer-events:none}
+.ask textarea{min-height:3.25rem;height:3.25rem}
+.ask-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.ask-msg{margin:.6rem 0 0;font-size:.92rem;color:var(--wrong)}
+.ask-msg:empty{display:none}
+.ask-note{margin:.6rem 0 0;font-size:.85rem;color:var(--ink-faint)}
+
 @media (max-width:640px){
   main{padding-top:1.25rem}
   .card{padding:1.1rem 1rem 1.2rem 2.1rem}
@@ -276,12 +302,14 @@ dialog::backdrop{background:rgba(16,24,36,.45)}
   .toc-num{font-size:1.2rem}
   .rate{grid-template-columns:repeat(2,1fr)}
   .prompt{font-size:1.15rem}
+  .ask{padding:.9rem}
+  .ask-q{max-width:92%}
 }
 @media (prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
 }
 @media print{
-  .top,.tabs,footer,.actions,.lesson-foot{display:none}
+  .top,.tabs,footer,.actions,.lesson-foot,.ask{display:none}
   body{background:#fff}
 }
 </style>
@@ -323,7 +351,17 @@ progressExplain:"Progress is saved in this browser only. To continue on another 
 storageOff:"This browser is not saving progress (private mode or blocked storage). Export your progress before closing the page.",
 theme:"Switch between light and dark",close:"Close",shortcuts:"Keyboard shortcuts",sc:["1–6 choose an option","Enter checks your answer or moves on","Space turns a flashcard","1–4 after turning: Again, Hard, Good, Easy"],
 footerOffline:"Works offline. Progress stays in this browser.",reviewTitleDue:"Review due items",reviewTitleWeak:"Weak spots",reviewTitleMixed:"Mixed practice",
-noData:"This page has no course data. Build it with build_site.py.",by:"By {name}",updated:"Version {v}",notFound:"That page does not exist.",skip:"Skip to content"},
+noData:"This page has no course data. Build it with build_site.py.",by:"By {name}",updated:"Version {v}",notFound:"That page does not exist.",skip:"Skip to content",
+askClaude:"Ask Claude",askAboutItem:"Ask Claude about this",askAboutLesson:"Ask Claude about this lesson",askPlaceholder:"Type your question",askSend:"Ask",askStop:"Stop",askThinking:"Thinking…",askStopped:"Stopped.",
+askOpen:"Open in Claude",askCopy:"Copy for Claude",askCopied:"Copied. Paste it into a chat with Claude.",askCopyFailed:"This browser blocked copying.",
+askNote:"Claude answers using your own Claude account. Answers can be wrong, so check them against the lesson.",
+askOutNote:"Opens a new chat with Claude in another tab, with your question and this material filled in. It is copied too, so you can paste it if the box is empty. Nothing is sent until you send it there.",
+askUnavailable:"Claude can’t answer inside this page. Use “Open in Claude” instead.",askBusy:"Claude is busy or your usage limit is reached. Try again later.",askSignIn:"Sign in to Claude again, then try once more.",
+askRefused:"Claude couldn’t answer that. Try asking it another way.",askEmpty:"No answer came back. Try rephrasing your question.",askTooLong:"That is too much to send at once. Ask a shorter question.",
+askFailed:"The answer was interrupted. Try again.",askCut:"The answer was cut short. Ask for less at a time.",askExplanation:"Explanation",askMyQuestion:"My question",
+askIntro:"I’m studying with a self-study site and have a question about the material below. Please base your answer on it, tell me if you use anything it doesn’t contain, and keep it short.",
+askSuggestQuiz:["Why is this the right answer?","Explain it more simply","Give me a similar question"],askSuggestItem:["Explain this more simply","Give me an example","How can I remember this?"],
+askSuggestLesson:["Summarise this lesson","Explain the hardest part simply","Ask me a question to check I understand"]},
 el:{contents:"Περιεχόμενα",moduleN:"Ενότητα {n}",ofModules:"Ενότητα {n} από {total}",lesson:"Μάθημα",quiz:"Κουίζ",cards:"Κάρτες",recall:"Ανάκληση",match:"Αντιστοίχιση",
 today:"Σήμερα",dueN:"{n} στοιχεία είναι για επανάληψη.",dueOne:"1 στοιχείο είναι για επανάληψη.",dueNone:"Δεν υπάρχει τίποτα για επανάληψη αυτή τη στιγμή.",dueHint:"Ό,τι εξασκείτε επιστρέφει εδώ με πρόγραμμα, λίγο πριν το ξεχάσετε.",
 newHere:"Ξεκινήστε από το πρώτο μάθημα και μετά εξασκηθείτε. Ό,τι απαντάτε λάθος επιστρέφει νωρίτερα.",
@@ -342,7 +380,17 @@ progressExplain:"Η πρόοδος αποθηκεύεται μόνο σε αυτ
 storageOff:"Αυτό το πρόγραμμα περιήγησης δεν αποθηκεύει την πρόοδο (ιδιωτική λειτουργία ή αποκλεισμένη αποθήκευση). Κάντε εξαγωγή προόδου πριν κλείσετε τη σελίδα.",
 theme:"Εναλλαγή φωτεινού και σκούρου θέματος",close:"Κλείσιμο",shortcuts:"Συντομεύσεις πληκτρολογίου",sc:["1–6 επιλογή απάντησης","Enter για έλεγχο ή συνέχεια","Space για να γυρίσει η κάρτα","1–4 μετά το γύρισμα: Ξανά, Δύσκολο, Καλά, Εύκολο"],
 footerOffline:"Λειτουργεί χωρίς σύνδεση. Η πρόοδος μένει σε αυτό το πρόγραμμα περιήγησης.",reviewTitleDue:"Επανάληψη",reviewTitleWeak:"Αδύναμα σημεία",reviewTitleMixed:"Μικτή εξάσκηση",
-noData:"Αυτή η σελίδα δεν έχει δεδομένα μαθήματος.",by:"Από: {name}",updated:"Έκδοση {v}",notFound:"Η σελίδα δεν υπάρχει.",skip:"Μετάβαση στο περιεχόμενο"}
+noData:"Αυτή η σελίδα δεν έχει δεδομένα μαθήματος.",by:"Από: {name}",updated:"Έκδοση {v}",notFound:"Η σελίδα δεν υπάρχει.",skip:"Μετάβαση στο περιεχόμενο",
+askClaude:"Ρωτήστε το Claude",askAboutItem:"Ρωτήστε το Claude για αυτό",askAboutLesson:"Ρωτήστε το Claude για αυτό το μάθημα",askPlaceholder:"Γράψτε την ερώτησή σας",askSend:"Αποστολή",askStop:"Διακοπή",askThinking:"Σκέφτεται…",askStopped:"Διακόπηκε.",
+askOpen:"Άνοιγμα στο Claude",askCopy:"Αντιγραφή για το Claude",askCopied:"Αντιγράφηκε. Επικολλήστε το σε μια συνομιλία με το Claude.",askCopyFailed:"Αυτό το πρόγραμμα περιήγησης δεν επιτρέπει την αντιγραφή.",
+askNote:"Το Claude απαντά μέσω του δικού σας λογαριασμού Claude. Οι απαντήσεις μπορεί να έχουν λάθη, γι’ αυτό ελέγξτε τες με το μάθημα.",
+askOutNote:"Ανοίγει νέα συνομιλία με το Claude σε άλλη καρτέλα, με την ερώτησή σας και αυτό το υλικό ήδη συμπληρωμένα. Αντιγράφεται επίσης, ώστε να το επικολλήσετε αν το πλαίσιο είναι κενό. Τίποτα δεν αποστέλλεται μέχρι να το στείλετε εσείς εκεί.",
+askUnavailable:"Το Claude δεν μπορεί να απαντήσει μέσα σε αυτή τη σελίδα. Χρησιμοποιήστε το «Άνοιγμα στο Claude».",askBusy:"Το Claude είναι απασχολημένο ή έχετε φτάσει το όριο χρήσης. Δοκιμάστε αργότερα.",askSignIn:"Συνδεθείτε ξανά στο Claude και δοκιμάστε πάλι.",
+askRefused:"Το Claude δεν μπόρεσε να απαντήσει. Δοκιμάστε να το ρωτήσετε διαφορετικά.",askEmpty:"Δεν ήρθε απάντηση. Δοκιμάστε να διατυπώσετε αλλιώς την ερώτηση.",askTooLong:"Είναι πολύ μεγάλο για να σταλεί. Κάντε μια συντομότερη ερώτηση.",
+askFailed:"Η απάντηση διακόπηκε. Δοκιμάστε ξανά.",askCut:"Η απάντηση κόπηκε. Ζητήστε λιγότερα κάθε φορά.",askExplanation:"Επεξήγηση",askMyQuestion:"Η ερώτησή μου",
+askIntro:"Μελετώ με μια ιστοσελίδα αυτοδιδασκαλίας και έχω μια ερώτηση για το παρακάτω υλικό. Βάσισε την απάντησή σου σε αυτό, πες μου αν χρησιμοποιείς κάτι που δεν περιέχει και κράτα την απάντηση σύντομη.",
+askSuggestQuiz:["Γιατί αυτή είναι η σωστή απάντηση;","Εξήγησέ το πιο απλά","Κάνε μου μια παρόμοια ερώτηση"],askSuggestItem:["Εξήγησέ το πιο απλά","Δώσε μου ένα παράδειγμα","Πώς να το θυμάμαι;"],
+askSuggestLesson:["Κάνε μια σύνοψη του μαθήματος","Εξήγησε απλά το πιο δύσκολο σημείο","Κάνε μου μια ερώτηση για να δω αν κατάλαβα"]}
 };
 
 /* ---------- data ---------- */
@@ -454,13 +502,165 @@ document.addEventListener("keydown",function(e){
   if(document.getElementById("dlg").open)return;
   keyHandler(e);
 });
+function tlist(k){var v=S[k];return Array.isArray(v)?v:STRINGS.en[k];}
+
+/* ---------- ask Claude ----------
+   Inside a claude.ai Artifact that declares the "sample" capability, answers come back
+   in the page. Anywhere else (a downloaded file, another host) the panel opens a new
+   Claude chat with the question filled in and copies it to the clipboard. The page
+   itself never contacts anything until the learner asks. */
+var ASK=C.askClaude!==false,sampleP=null,sampleOff=false,askCtl=null;
+if(ASK&&window.claude&&typeof window.claude.use==="function"){
+  try{sampleP=Promise.resolve(window.claude.use("sample")).then(function(s){return typeof s==="function"?s:null;},function(){return null;});}catch(e){sampleP=null;}
+}
+function getSample(){return sampleOff||!sampleP?Promise.resolve(null):sampleP;}
+function stopAsk(){if(askCtl){var c=askCtl;askCtl=null;try{c.abort();}catch(e){}}}
+var CLAUDE_NEW="https://claude.ai/new",URL_BUDGET=7000,CHAT_ICON="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z";
+var ASK_OFF=["not_granted","sampling_disabled","not_declared","capability_disabled","capability_removed"];
+var ASK_ERR={rate_limited:"askBusy",session_expired:"askSignIn",refused:"askRefused",empty_completion:"askEmpty",prompt_too_large:"askTooLong"};
+function icon(d){
+  var ns="http://www.w3.org/2000/svg",s=document.createElementNS(ns,"svg"),p=document.createElementNS(ns,"path");
+  [["viewBox","0 0 24 24"],["fill","none"],["stroke","currentColor"],["stroke-width","1.8"],["stroke-linecap","round"],["stroke-linejoin","round"],["aria-hidden","true"]].forEach(function(a){s.setAttribute(a[0],a[1]);});
+  p.setAttribute("d",d);s.appendChild(p);return s;
+}
+function clip(s,n){s=String(s==null?"":s).trim();return s.length>n?s.slice(0,n).trim()+" …":s;}
+function bare(s){return String(s).replace(/[.!]\s*$/,"");}
+function srcText(s){var x=s&&s.ref&&SOURCES[s.ref];return x?x.title+(s.loc?", "+s.loc:""):"";}
+function askHead(m){return C.title+(m?" · "+t("moduleN",{n:m._n})+": "+m.title:"");}
+function lessonText(m){
+  var out=[];
+  if((m.objectives||[]).length)out.push(t("objectives")+":\n"+m.objectives.map(function(o){return "- "+o;}).join("\n"));
+  (m.lesson||[]).forEach(function(b){
+    if(b.type==="heading")out.push("## "+b.text);
+    else if(b.type==="list")out.push((b.items||[]).map(function(x,i){return(b.ordered?(i+1)+". ":"- ")+x;}).join("\n"));
+    else if(b.type==="callout")out.push((b.title?b.title+": ":"")+b.text);
+    else if(b.type==="table")out.push([(b.headers||[]).join(" | ")].concat((b.rows||[]).map(function(r){return r.join(" | ");})).join("\n"));
+    else if(b.type==="quote")out.push("> "+b.text+(b.cite?" ("+b.cite+")":""));
+    else if(b.text)out.push(b.text);
+  });
+  if((m.keyTerms||[]).length)out.push(t("keyTerms")+":\n"+m.keyTerms.map(function(k){return "- "+k.term+": "+k.definition;}).join("\n"));
+  return out.join("\n\n");
+}
+function itemText(it,st){
+  var L=[],src=srcText(it.source);st=st||{};
+  if(it.type==="mcq"||it.type==="multi"||it.type==="truefalse"){
+    L.push(t("quiz")+": "+it.prompt);
+    (st.opts||[]).forEach(function(o,i){var m=[];if(o.ok)m.push("✓ "+bare(t("correct")));if(st.sel&&st.sel.indexOf(i)>=0)m.push("← "+t("yourAnswer"));L.push((i+1)+". "+o.text+(m.length?"  ("+m.join(", ")+")":""));});
+    if(st.result!=null)L.push(t("yourAnswer")+": "+(st.result?t("correct"):t("incorrect")));
+  }else if(it.type==="flashcard"){L.push(t("front")+": "+it.front,t("back")+": "+it.back);}
+  else if(it.type==="recall"){
+    L.push(t("recall")+": "+it.prompt,t("modelAnswer")+": "+it.answer);
+    if((it.keyPoints||[]).length){L.push(t("tickPoints"));it.keyPoints.forEach(function(k,i){L.push((st.ticked&&st.ticked[i]?"☑ ":"☐ ")+k);});}
+    if(st.answer&&st.answer.trim())L.push(t("yourAnswer")+": "+clip(st.answer,2000));
+  }else if(it.type==="matching"){
+    L.push(t("match")+(it.prompt?": "+it.prompt:""));
+    it.pairs.forEach(function(p){L.push("- "+p.left+" → "+p.right);});
+    if(st.first!=null)L.push(t("scoreLine",{right:st.first,total:it.pairs.length}));
+  }
+  if(it.explanation)L.push(t("askExplanation")+": "+it.explanation);
+  if(src)L.push(t("source")+": "+src);
+  return L.join("\n");
+}
+function itemCx(it,st){var m=modById(it.module);return{module:m,body:itemText(it,st),extra:m?clip(lessonText(m),6000):""};}
+function tutorRules(cx){
+  return "You are a friendly tutor inside a self-study website. The learner is looking at the course material below and will ask you about it.\n"+
+    "- Keep answers short (about 150 words) unless the learner asks for more. Explain the reasoning instead of only repeating the answer.\n"+
+    "- Base your answers on this material. If a question goes beyond it, say so, then answer from general knowledge. Never invent sources or page numbers.\n"+
+    "- In the material, \"✓\" marks a correct option, \"←\" marks the learner's own choice, and \"☑\" marks a key point the learner says they covered.\n"+
+    "- If the learner asks you to quiz them, ask one question at a time and wait for their answer.\n"+
+    "- Reply in the language the learner writes in.\n"+
+    "- Plain text only. **Bold** and simple lists that start with \"- \" are fine; no headings, tables or code blocks.\n\n"+
+    "Course: "+askHead(cx.module)+"\nCourse language: "+(C.language||"en")+"\n\n"+cx.body+
+    (cx.extra?"\n\n"+t("lesson")+" (for context):\n"+cx.extra:"");
+}
+function outPrompt(cx,q,budget){
+  var head=t("askIntro")+"\n\n"+askHead(cx.module)+"\n\n",tail="\n\n"+t("askMyQuestion")+": "+q,body=clip(cx.body,8000);
+  while(budget&&body.length>120&&encodeURIComponent(head+body+tail).length>budget)body=clip(body,Math.floor(body.length*.75));
+  return head+body+tail;
+}
+function outUrl(cx,q){return CLAUDE_NEW+"?q="+encodeURIComponent(outPrompt(cx,q,URL_BUDGET));}
+function copyText(s){
+  function legacy(){var x=h("textarea",{style:"position:fixed;top:0;left:0;opacity:0","aria-hidden":"true"});x.value=s;document.body.appendChild(x);x.select();var ok=false;try{ok=document.execCommand("copy");}catch(e){}x.remove();return ok;}
+  try{if(navigator.clipboard&&navigator.clipboard.writeText)return navigator.clipboard.writeText(s).then(function(){return true;},legacy);}catch(e){}
+  return Promise.resolve(legacy());
+}
+function richText(el,text){
+  el.textContent="";var para=[],lst=null;
+  function flush(){if(para.length){el.appendChild(h("p",null,inline(para.join(" "))));para=[];}}
+  String(text).replace(/\r/g,"").split("\n").forEach(function(ln){
+    var m=/^\s*(?:[-*•]|(\d+)[.)])\s+(.*)$/.exec(ln);
+    if(m){flush();var ord=!!m[1];if(!lst||lst._ord!==ord){lst=h(ord?"ol":"ul");lst._ord=ord;el.appendChild(lst);}lst.appendChild(h("li",null,inline(m[2])));return;}
+    lst=null;
+    if(!ln.trim())return flush();
+    var hd=/^\s*#{1,6}\s+(.*)$/.exec(ln);
+    if(hd){flush();el.appendChild(h("p",null,h("strong",null,inline(hd[1]))));return;}
+    para.push(ln.trim());
+  });
+  flush();
+}
+function askPanel(title,chips,getCx){
+  var turns=[],busy=false,mode=null,ctl=null;
+  var log=h("div",{class:"ask-log","aria-live":"polite"});
+  var ta=h("textarea",{rows:"2",placeholder:t("askPlaceholder"),"aria-label":t("askPlaceholder")});
+  var sendB=h("button",{class:"btn",type:"button",disabled:true,onclick:function(){ask(ta.value);}},t("askSend"));
+  var stopB=h("button",{class:"btn quiet",type:"button",hidden:true,onclick:function(){if(ctl)ctl.abort();}},t("askStop"));
+  var goA=h("a",{class:"btn ask-go",href:CLAUDE_NEW,target:"_blank",rel:"noopener noreferrer"},t("askOpen"));
+  var copyB=h("button",{class:"btn quiet",type:"button",onclick:function(){copyText(outPrompt(getCx(),ta.value.trim(),0)).then(function(ok){toast(ok?t("askCopied"):t("askCopyFailed"));});}},t("askCopy"));
+  var inRow=h("div",{class:"ask-row",hidden:true},sendB,stopB),outRow=h("div",{class:"ask-row",hidden:true},goA,copyB);
+  var msg=h("p",{class:"ask-msg",role:"status"}),note=h("p",{class:"ask-note"}),chipRow=h("div",{class:"ask-chips"});
+  chips.forEach(function(c){chipRow.appendChild(h("button",{class:"chip",type:"button",onclick:function(){if(mode==="inline")ask(c);else{ta.value=c;sync();ta.focus();}}},c));});
+  var panel=h("section",{class:"ask",hidden:true,"aria-label":title},h("h3",null,icon(CHAT_ICON),title),log,chipRow,ta,inRow,outRow,msg,note);
+  function setMode(m){mode=m;inRow.hidden=m!=="inline";outRow.hidden=m!=="out";note.textContent=m==="inline"?t("askNote"):t("askOutNote");sync();}
+  function sync(){var q=ta.value.trim();sendB.disabled=busy||!q;goA.href=q&&mode==="out"?outUrl(getCx(),q):CLAUDE_NEW;}
+  function setBusy(b){busy=b;stopB.hidden=!b;log.setAttribute("aria-busy",b?"true":"false");Array.prototype.forEach.call(chipRow.children,function(c){c.disabled=b;});sync();}
+  ta.addEventListener("input",function(){msg.textContent="";sync();});
+  ta.addEventListener("keydown",function(e){if(e.key!=="Enter"||e.shiftKey||e.isComposing)return;e.preventDefault();if(mode==="inline")ask(ta.value);else if(mode==="out")goA.click();});
+  goA.addEventListener("click",function(e){
+    var q=ta.value.trim();if(!q){e.preventDefault();ta.focus();return;}
+    var cx=getCx();goA.href=outUrl(cx,q);copyText(outPrompt(cx,q,0));
+  });
+  function ask(q){
+    q=String(q||"").trim();if(!q||busy)return;
+    getSample().then(function(s){if(s&&!sampleOff)run(s,q);else{setMode("out");ta.value=q;sync();ta.focus();}});
+  }
+  function run(s,q){
+    var cx=getCx();msg.textContent="";turns.push({role:"user",content:q});
+    var qEl=h("div",{class:"ask-q"},q),aEl=h("div",{class:"ask-a is-wait"},t("askThinking"));
+    log.appendChild(qEl);log.appendChild(aEl);ta.value="";
+    stopAsk();var my=new AbortController();ctl=my;askCtl=my;setBusy(true);
+    var input=[{role:"user",content:tutorRules(cx)}].concat(turns.slice(-9));
+    var opts={signal:my.signal,onText:function(u){aEl.classList.remove("is-wait");richText(aEl,u.text);}};
+    if(turns.length>1)opts.cache=false;
+    var p;try{p=Promise.resolve(s(input,opts));}catch(e){p=Promise.reject(e);}
+    p.then(function(r){
+      var txt=r&&r.text?String(r.text):"";aEl.classList.remove("is-wait");richText(aEl,txt);turns.push({role:"assistant",content:txt});
+      if(r&&r.truncated)msg.textContent=t("askCut");
+    },function(e){
+      var code=(e&&e.code)||"upstream_error",kept=code!=="refused"&&e&&typeof e.text==="string"&&e.text.trim()?e.text:"";
+      if(kept){aEl.classList.remove("is-wait");richText(aEl,kept);turns.push({role:"assistant",content:kept});if(code==="cancelled")aEl.appendChild(h("p",{class:"ask-note"},t("askStopped")));}
+      else{turns.pop();qEl.remove();aEl.remove();if(!ta.value)ta.value=q;}
+      if(ASK_OFF.indexOf(code)>=0){sampleOff=true;setMode("out");msg.textContent=t("askUnavailable");}
+      else if(code!=="cancelled")msg.textContent=t(ASK_ERR[code]||"askFailed");
+    }).then(function(){if(askCtl===my)askCtl=null;if(ctl===my)ctl=null;setBusy(false);});
+  }
+  var btn=h("button",{class:"btn link ask-open",type:"button","aria-expanded":"false",onclick:function(){
+    var open=panel.hidden;panel.hidden=!open;btn.setAttribute("aria-expanded",open?"true":"false");
+    if(!open)return;
+    if(!mode)getSample().then(function(s){if(!mode)setMode(s&&!sampleOff?"inline":"out");});
+    ta.focus({preventScroll:true});panel.scrollIntoView({block:"nearest"});
+  }},icon(CHAT_ICON),t("askClaude"));
+  return{button:btn,panel:panel};
+}
+function addAsk(actions,holder,chips,getCx){
+  if(!ASK)return;var a=askPanel(t("askAboutItem"),chips,getCx);actions.appendChild(a.button);holder.appendChild(a.panel);
+}
 
 /* ---------- item views ---------- */
 function choiceView(item,ctx){
   var multi=item.type==="multi",tf=item.type==="truefalse",opts;
   if(tf)opts=[{text:t("trueLabel"),ok:item.answer===true},{text:t("falseLabel"),ok:item.answer===false}];
   else{opts=item.options.map(function(o,i){return{text:o,ok:multi?item.answer.indexOf(i)>=0:item.answer===i};});if(item.shuffle!==false)opts=shuffle(opts);}
-  var sel=[],done=false,btns=[];
+  var sel=[],done=false,btns=[],result=null,askHold=h("div");
   var prompt=h("p",{class:"prompt"},inline(item.prompt));
   var list=h("ul",{class:"options"});
   var fb=h("div",{class:"feedback","aria-live":"polite"});
@@ -478,7 +678,7 @@ function choiceView(item,ctx){
   }
   function submit(){
     if(done||!sel.length)return;done=true;
-    var ok=opts.every(function(o,i){return o.ok===(sel.indexOf(i)>=0);});
+    var ok=opts.every(function(o,i){return o.ok===(sel.indexOf(i)>=0);});result=ok;
     btns.forEach(function(b,i){b.disabled=true;var m=b.querySelector(".mark");
       if(opts[i].ok){b.classList.add("is-right");m.textContent="✓";}
       else if(sel.indexOf(i)>=0){b.classList.add("is-wrong");m.textContent="✗";}
@@ -491,7 +691,9 @@ function choiceView(item,ctx){
     ctx.grade(ok?"good":"again");
     checkBtn.remove();
     var nb=h("button",{class:"btn",type:"button",onclick:ctx.next},ctx.last?t("finish"):t("next"));
-    actions.appendChild(nb);nb.focus();
+    actions.appendChild(nb);
+    addAsk(actions,askHold,tlist("askSuggestQuiz"),function(){return itemCx(item,{opts:opts,sel:sel,result:result});});
+    nb.focus();
   }
   keyHandler=function(e){
     var n=parseInt(e.key,10);
@@ -501,9 +703,9 @@ function choiceView(item,ctx){
     if(o){e.preventDefault();if(!multi)pick(btns.indexOf(o));submit();}
     else if(sel.length&&e.target.tagName!=="BUTTON"){e.preventDefault();submit();}
   };
-  return h("div",{class:"card"},
+  return h("div",null,h("div",{class:"card"},
     h("div",{class:"card-top"},h("span",null,ctx.label||""),h("span",null,multi?t("selectAll"):"")),
-    prompt,list,fb,actions);
+    prompt,list,fb,actions),askHold);
 }
 
 function flashView(item,ctx){
@@ -517,19 +719,21 @@ function flashView(item,ctx){
     rate.appendChild(h("button",{type:"button",class:g[1],onclick:function(){done(g[0]);}},h("span",null,(i+1)+"  "+t(g[0])),h("small",null,whenLabel(nextBox(box,g[0])))));
   });
   var showBtn=h("button",{class:"btn",type:"button",onclick:flip},t("showAnswer"));
-  var actions=h("div",{class:"actions"},showBtn);
+  var actions=h("div",{class:"actions"},showBtn),askAct=h("div",{class:"actions"}),askHold=h("div");
   function flip(){
     if(flipped)return;flipped=true;wrap.classList.add("is-flipped");
     front.setAttribute("aria-hidden","true");back.removeAttribute("aria-hidden");
     wrap.removeAttribute("role");wrap.removeAttribute("tabindex");wrap.removeAttribute("aria-label");
-    say(item.back);showBtn.remove();rate.hidden=false;rate.querySelector(".r-good").focus();
+    say(item.back);showBtn.remove();rate.hidden=false;
+    addAsk(askAct,askHold,tlist("askSuggestItem"),function(){return itemCx(item,{});});
+    rate.querySelector(".r-good").focus();
   }
   function done(g){ctx.grade(g);ctx.next();}
   keyHandler=function(e){
     if(!flipped&&(e.key===" "||e.key==="Enter")){e.preventDefault();flip();}
     else if(flipped){var n=parseInt(e.key,10);if(n>=1&&n<=4){e.preventDefault();done(["again","hard","good","easy"][n-1]);}}
   };
-  return h("div",null,wrap,actions,rate);
+  return h("div",null,wrap,actions,rate,askAct,askHold);
 }
 
 function recallView(item,ctx){
@@ -537,7 +741,7 @@ function recallView(item,ctx){
   var area=h("div");
   var showBtn=h("button",{class:"btn",type:"button",onclick:reveal},t("showModel"));
   var actions=h("div",{class:"actions"},showBtn);
-  var boxes=[];
+  var boxes=[],askHold=h("div");
   function reveal(){
     ta.readOnly=true;showBtn.remove();
     var pts=h("ul",{class:"points"});
@@ -545,6 +749,7 @@ function recallView(item,ctx){
     add(area,h("div",{class:"model"},h("h4",null,t("modelAnswer")),h("p",null,inline(item.answer)),srcLine(item.source)));
     if(boxes.length)add(area,[h("p",{class:"hint",style:"margin:1rem 0 0"},t("tickPoints")),pts]);
     var sb=h("button",{class:"btn",type:"button",onclick:finish},t("saveContinue"));actions.appendChild(sb);
+    addAsk(actions,askHold,tlist("askSuggestItem"),function(){return itemCx(item,{answer:ta.value,ticked:boxes.map(function(b){return b.checked;})});});
     (boxes[0]||sb).focus();
   }
   function finish(){
@@ -553,15 +758,15 @@ function recallView(item,ctx){
     ctx.grade(g);ctx.next();
   }
   keyHandler=null;
-  return h("div",{class:"card"},h("div",{class:"card-top"},h("span",null,ctx.label||""),h("span",null,t("recall"))),
-    h("p",{class:"prompt"},inline(item.prompt)),ta,area,actions);
+  return h("div",null,h("div",{class:"card"},h("div",{class:"card-top"},h("span",null,ctx.label||""),h("span",null,t("recall"))),
+    h("p",{class:"prompt"},inline(item.prompt)),ta,area,actions),askHold);
 }
 
 function matchView(item,ctx){
   var pairs=item.pairs,n=pairs.length;
   var order=shuffle(pairs.map(function(_,i){return i;}));
   if(n>2){var tries=0;while(order.every(function(v,i){return v===i;})&&tries++<10)order=shuffle(order);}
-  var L=[],R=[],link={},selL=null,selR=null,locked={},graded=false,finished=false;
+  var L=[],R=[],link={},selL=null,selR=null,locked={},graded=false,finished=false,first=null,askHold=h("div");
   var fb=h("div",{class:"feedback","aria-live":"polite"});
   var checkBtn=h("button",{class:"btn",type:"button",disabled:true,onclick:check},t("checkMatches"));
   var actions=h("div",{class:"actions"},checkBtn);
@@ -594,7 +799,7 @@ function matchView(item,ctx){
     for(var i=0;i<n;i++){var ok=link[i]===i;if(ok){right++;locked[i]=true;}
       L[i].classList.toggle("is-right",ok);L[i].classList.toggle("is-wrong",!ok);
       R[link[i]].classList.toggle("is-right",ok);R[link[i]].classList.toggle("is-wrong",!ok);}
-    if(!graded){graded=true;ctx.grade(right===n?"good":"again");}
+    if(!graded){graded=true;first=right;ctx.grade(right===n?"good":"again");}
     fb.className="feedback "+(right===n?"good":"bad");fb.textContent="";
     add(fb,h("span",{class:"verdict"},right===n?t("matchAllRight"):t("matchSomeWrong",{n:right,total:n})));
     if(item.explanation&&right===n)add(fb,h("p",null,inline(item.explanation)));
@@ -616,11 +821,16 @@ function matchView(item,ctx){
     fb.className="feedback";fb.textContent="";if(item.explanation)add(fb,h("p",null,inline(item.explanation)));
     actions.textContent="";end();
   }
-  function end(){finished=true;L.concat(R).forEach(function(b){b.disabled=true;});var nb=h("button",{class:"btn",type:"button",onclick:ctx.next},ctx.last?t("finish"):t("next"));actions.appendChild(nb);nb.focus();}
+  function end(){
+    finished=true;L.concat(R).forEach(function(b){b.disabled=true;});
+    var nb=h("button",{class:"btn",type:"button",onclick:ctx.next},ctx.last?t("finish"):t("next"));actions.appendChild(nb);
+    addAsk(actions,askHold,tlist("askSuggestItem"),function(){return itemCx(item,{first:first});});
+    nb.focus();
+  }
   keyHandler=null;paint();
-  return h("div",{class:"card"},h("div",{class:"card-top"},h("span",null,ctx.label||""),h("span",null,t("match"))),
+  return h("div",null,h("div",{class:"card"},h("div",{class:"card-top"},h("span",null,ctx.label||""),h("span",null,t("match"))),
     h("p",{class:"prompt"},inline(item.prompt||t("match"))),h("p",{class:"hint"},t("matchHint")),
-    h("div",{class:"match"},colL,colR),fb,actions);
+    h("div",{class:"match"},colL,colR),fb,actions),askHold);
 }
 
 function itemView(item,ctx){
@@ -634,7 +844,7 @@ function itemView(item,ctx){
 function runSession(root,items,opt){
   var i=0,results=[];
   function show(){
-    keyHandler=null;root.textContent="";
+    stopAsk();keyHandler=null;root.textContent="";
     if(i>=items.length)return finish();
     var it=items[i],m=modById(it.module);
     root.appendChild(h("div",{class:"session-bar"},meter(i/items.length),h("span",null,t("itemOf",{n:i+1,total:items.length}))));
@@ -765,8 +975,13 @@ function lessonView(m,body){
   var readBtn=h("button",{class:P.lessons[m.id]?"btn quiet":"btn",type:"button",onclick:function(){P.lessons[m.id]=true;save();readBtn.textContent="✓ "+t("lessonRead");readBtn.className="btn quiet";readBtn.disabled=true;if(go)go.className="btn";}},P.lessons[m.id]?"✓ "+t("lessonRead"):t("markRead"));
   if(P.lessons[m.id])readBtn.disabled=true;
   var go=firstTab?h("a",{class:P.lessons[m.id]?"btn":"btn quiet",href:"#/m/"+m.id+"/"+firstTab},t("practiseNow")):null;
-  body.appendChild(h("div",{class:"lesson-foot"},h("div",{class:"row"},readBtn,go),
+  var mainRow=h("div",{class:"row"},readBtn,go);
+  body.appendChild(h("div",{class:"lesson-foot"},mainRow,
     h("div",{class:"row"},prev?h("a",{class:"btn quiet",href:"#/m/"+prev.id},t("prevModule")):null,next?h("a",{class:"btn quiet",href:"#/m/"+next.id},t("nextModule")):null)));
+  if(ASK){
+    var a=askPanel(t("askAboutLesson"),tlist("askSuggestLesson"),function(){return{module:m,body:clip(lessonText(m),12000)};});
+    mainRow.appendChild(a.button);body.appendChild(a.panel);
+  }
 }
 
 function reviewView(kind){
@@ -833,7 +1048,7 @@ document.getElementById("footB").textContent=t("footerOffline");
 
 /* ---------- router ---------- */
 function route(){
-  keyHandler=null;app.textContent="";setActiveHeader();
+  stopAsk();keyHandler=null;app.textContent="";setActiveHeader();
   var parts=(location.hash||"#/").replace(/^#\/?/,"").split("/").filter(Boolean).map(decodeURIComponent);
   if(!parts.length)dashboard();
   else if(parts[0]==="m")moduleView(parts[1],parts[2]||"lesson");

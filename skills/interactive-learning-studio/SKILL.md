@@ -10,6 +10,7 @@ no installs) and contains, for every module: a lesson, a quiz, flashcards with s
 repetition, active-recall prompts and matching practice. A dashboard shows what is due
 today, weak spots and progress. Progress is saved in the learner's browser and can be
 exported/imported as a file. Light and dark themes; English or Greek interface.
+Every lesson and answered item has an **Ask Claude** button (see step 7).
 
 The engine is fixed and tested (`assets/template.html`). The work in this skill is the
 **content**: write it as course JSON in the shape described in
@@ -117,6 +118,16 @@ item counts) and that it is a single file: download it, double-click to open, wo
 without internet, progress stays in that browser and moves between devices with
 Export/Import progress. Mention any source problems found in step 4.
 
+**Ask Claude.** Lessons and answered items have an Ask Claude button. In the downloaded
+file it opens a new Claude chat in another tab, with the learner's question and that
+item or lesson filled in, and copies the same text to the clipboard. Nothing is sent
+unless the learner sends it. If the user wants learners to get answers inside the page,
+and your session can publish claude.ai Artifacts, offer to publish the built `.html` as an
+Artifact that declares the `sample` capability (`capabilities: {"sample": {}}`). There,
+answers stream into the page, each viewer allows it once, and answers use the viewer's own
+Claude account. If the user does not want learners to have AI help (for example, for an
+assessment), set `"askClaude": false` in `course` and do not declare `sample`.
+
 Keep the course JSON in the working folder. To change the site later, either edit that
 JSON or extract it from the site (step 1) and rebuild to the same file name.
 
@@ -129,3 +140,5 @@ JSON or extract it from the site (step 1) and rebuild to the same file name.
 | Italics appear in the middle of a formula | A lone `*` was read as italics; use `×`. |
 | "This page has no course data" | The template was opened directly; always build with `build_site.py`. |
 | Interface labels in English for a non-English course | Add translated labels in `course.ui` (`references/ui-strings.md`). |
+| Ask Claude opens a new tab instead of answering in the page | Expected outside claude.ai. In-page answers need the site published as a claude.ai Artifact that declares `sample`. |
+| The "Open in Claude" chat opens with an empty message box | The learner pastes it: the button also copies the question. |

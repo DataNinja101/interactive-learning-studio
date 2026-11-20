@@ -60,6 +60,9 @@ questions can be reviewed before the site is made.
 - Light and dark themes, phone-friendly layout, keyboard shortcuts.
 - English or Greek interface; other languages through translated labels.
 - Every answer can show the source and page it came from.
+- **Ask Claude** on every lesson and answered item. In the downloaded file it opens a new
+  Claude chat with the question and that item filled in. Published as a claude.ai
+  Artifact, Claude answers inside the page. Turn it off with `"askClaude": false`.
 
 ## How it works
 
@@ -94,8 +97,9 @@ with Chromium.
 
 ## Privacy
 
-No data collection, analytics or network requests. Sites keep progress in the
-learner's own browser. See [PRIVACY.md](PRIVACY.md).
+No data collection or analytics, and sites make no network requests of their own.
+Progress stays in the learner's own browser. Ask Claude sends something only when a
+learner asks a question. See [PRIVACY.md](PRIVACY.md).
 
 ## Licence
 
